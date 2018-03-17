@@ -303,55 +303,27 @@
       
         
           
-            <h2 id="树莓派网页控制小灯教程"><a href="#树莓派网页控制小灯教程" class="headerlink" title="树莓派网页控制小灯教程"></a>树莓派网页控制小灯教程</h2><p>这是我最近在咸鱼上接的一个小项目,整体逻辑不复杂,功能也很简单,就是多端控制二极管。</p>
-<h3 id="电路图分析"><a href="#电路图分析" class="headerlink" title="电路图分析"></a>电路图分析</h3><p>正极接GP17,负极接GND</p>
-<p><img src="/images/raspi1.png" alt=""></p>
-<p>实物连接图如下</p>
-<p><img src="/images/raspi2.png" alt=""></p>
-<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><ul>
-<li>wiringPi </li>
-<li>nodejs</li>
-<li>git</li>
-</ul>
-<p>1.安装wiringPi</p>
-<p><code>cd ~/Desktop/</code></p>
-<p><code>git clone git://git.drogon.net/wiringPi</code></p>
-<p><code>cd wiringPi</code></p>
-<p><code>./build</code></p>
-<p>2.安装nodejs<br><code>curl -sL https://deb.nodesource.com/setup_9.x| sudo -E bash -</code></p>
-<p><code>sudo apt-get install -y nodejs</code></p>
-<p> 输入<code>node -v</code>显示node版本信息则正常</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>安装好wiringPi和nodejs,我们就可以先测试一下了<br>输入<code>gpio mode 0 out</code>(0代表的是之前我们连接的GP17),我们也可以这样<code>gpio -g mode 17 out</code><br>输入<code>gpio write 0 1</code>向0写入高电平,此时如果正常,小灯应该亮了,如果出现异常请仔细检查线路连接是否正确<br>输入<code>gpio write 0 0</code>向0写入低电平,小灯灭</p>
-<h3 id="后台逻辑编辑"><a href="#后台逻辑编辑" class="headerlink" title="后台逻辑编辑"></a>后台逻辑编辑</h3><p>脚本编辑,读取当前小灯状态,开灯或关灯,并返回小灯状态</p>
-<pre><code>#!/bin/bash
-status=`gpio read 0`
-echo $status
-if [ 0 -eq $status ];then
-    gpio write 0 1
-else
-    gpio write 0 0
-fi
-status=`gpio read 0`
-echo $status
-</code></pre><p>后台逻辑编写,以post方式请求接口,并返回小灯的状态</p>
-<pre><code>app.post(&apos;/api/led&apos;,(req,res)=&gt;{
-    exec(&apos;bash ./bash/led.sh&apos;,(err,stdout,stderr)=&gt;{
-        if(err){
-            res.json({&quot;err&quot;:err})
-        }
-        res.json({&quot;success&quot;:stdout});
-    })
+          树莓派网页控制小灯教程这是我最近在咸鱼上接的一个小项目,整体逻辑不复杂,功能也很简单,就是多端控制二极管。
+电路图分析正极接GP17,负极接GND
 
-})
-</code></pre><h2 id="后台"><a href="#后台" class="headerlink" title="后台"></a>后台</h2><p><code>git clone https://github.com/Caibiy/LED.git &amp;&amp; npm install --save  &amp;&amp; node app.js</code></p>
-<p>访问地址就可以对小灯进行控制了</p>
-<p><img src="/images/led.png" alt=""></p>
-<h2 id="APP"><a href="#APP" class="headerlink" title="APP"></a>APP</h2><p>APP需要下载AndroidStudio和相关sdk</p>
-<p><code>git clone https://github.com/Caibiy/LedApp.git</code> </p>
-<p>导入到AndroidStudio后等待build后修改接口地址为树莓派的地址,然后进行安装如果有安卓手机可以直接安装到自己手机上,如果没有可以安装到模拟器上进行控制</p>
-<p><img src="/images/app.png" alt=""></p>
+实物连接图如下
 
-          
+开发环境
+wiringPi 
+nodejs
+git
+
+1.安装wiringPi
+cd ~/Desktop/
+git clone gi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/17/树莓派小灯/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -469,13 +441,16 @@ echo $status
       
         
           
-            <h3 id="关于我的一些介绍"><a href="#关于我的一些介绍" class="headerlink" title="关于我的一些介绍"></a>关于我的一些介绍</h3><pre><code>励志成为一个good man的奋斗青年
-</code></pre><h2 id="坚强"><a href="#坚强" class="headerlink" title="坚强"></a>坚强</h2><p>我自认为,我在绝境中反而会慢慢成长起来,当情况变得比我想象的还糟的时候,我反而会变得乐观劝自己,有一些豁达的感觉,高中的时候,高一高二我都是整天睡觉,上课从来不听,从来没想过自己的未来和前途。后来高三的时候我开始好好学习,虽然最后成绩不是特别好,但是我觉得拿我曾经犯过的错来说,我觉得我可能考的还不错。江苏高考(高一高二我3门200分都考不到)最后我考了256,我们那年310上本二,最后我读了一个大专。高一高二跟我一起玩的朋友,他们在高三的时候没有一个学习的,他们放弃了自己,这很可怕,最后有的没有上学了,有的只能选一个很垃圾的大专。可能这不叫坚强,也许应该叫做垂死挣扎把。o(&gt;﹏&lt;)o</p>
-<h2 id="自以为是"><a href="#自以为是" class="headerlink" title="自以为是"></a>自以为是</h2><p>虽然我知道自己不是很优秀,但是大部分的时候我总是很自信,我觉得自己还是有救的。我总觉得还有后路,可能这跟我爸妈比较宠我有关系,我不认为这是一个好习惯,我总是很懒并且未自己找很多理由,同时我坚信未来我会成为一个good guy。</p>
-<h2 id="半桶水技术"><a href="#半桶水技术" class="headerlink" title="半桶水技术"></a>半桶水技术</h2><p>我喜欢很多技术,同时我也会在这个博客上,尽可能分享我学习到的一些东西,在以后的路上我希望自己可以走的更加的踏实一点,写一些教程和项目。</p>
-<p>最后用我自己喜欢的一句话与君共勉,”愿你出走半生,归来仍是少年”</p>
-
-          
+          关于我的一些介绍励志成为一个good man的奋斗青年
+坚强我自认为,我在绝境中反而会慢慢成长起来,当情况变得比我想象的还糟的时候,我反而会变得乐观劝自己,有一些豁达的感觉,高中的时候,高一高二我都是整天睡觉,上课从来不听,从来没想过自己的未来和前途。后来高三的时候我开始好好学习,虽然最后成绩不是特
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/28/Hello-大家好我是caibiy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
